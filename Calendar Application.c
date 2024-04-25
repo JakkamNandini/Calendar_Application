@@ -2,6 +2,56 @@
 #include<conio.h>
 #include<windows.h>
 #include<string.h>
+void gotoxy(int,int);
+void menu();
+void viewcalendar();
+void calendar(int,int);
+int dayofweek(int,int,int);
+void add();
+void view();
+void edit();
+void del();
+void deleteall();
+
+struct event
+{
+    char date[15];
+    char title[50];
+    char description[1000];
+};
+
+int main(void)
+{
+    gotoxy(45,8);
+    printf("*******CALENDAR APPLICATION*******");
+    gotoxy(10,15);
+    printf("Enter any key to Start:");
+    getch();
+    menu();
+    return 0;
+}
+
+void menu()
+{
+    system("cls");
+    gotoxy(10,2);
+    printf("<------MENU------>\n\n\n");
+    int choice;
+    printf("1.View calendar\n2.Add event\n3.Edit event\n4.View events\n5.Delete event\n6.Delete all the events\n7.Exit\n");
+    printf("Enter a number according to your choice:");
+    scanf("%d",&choice);
+    switch(choice)
+    {
+        case 1:viewcalendar();break;
+        case 2:add();break;
+        case 3:edit();break;
+        case 4:view();break;
+        case 5:del();break;
+        case 6:deleteall();break;
+        case 7:return;
+        default:printf("Invalid Choice");
+    }
+}
 void gotoxy(int x,int y)
 {
     COORD c;
@@ -9,12 +59,7 @@ void gotoxy(int x,int y)
     c.Y=y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),c);
 }
-struct event
-{
-    char date[15];
-    char title[50];
-    char description[1000];
-};
+
 void viewcalendar()
 {
     system("cls");
@@ -66,6 +111,7 @@ void calendar(int month,int year)
     }
     else menu();
 }
+
 int dayofweek(int d,int m,int y)
 {
     if(m<3) {m+=12;y--;}
@@ -247,34 +293,5 @@ void deleteall()
     getch();
     menu();
 }
-void menu()
-{
-    system("cls");
-    gotoxy(10,2);
-    printf("<------MENU------>\n\n\n");
-    int choice;
-    printf("1.View calendar\n2.Add event\n3.Edit event\n4.View events\n5.Delete event\n6.Delete all the events\n7.Exit\n");
-    printf("Enter a number according to your choice:");
-    scanf("%d",&choice);
-    switch(choice)
-    {
-        case 1:viewcalendar();break;
-        case 2:add();break;
-        case 3:edit();break;
-        case 4:view();break;
-        case 5:del();break;
-        case 6:deleteall();break;
-        case 7:return;
-        default:printf("Invalid Choice");
-    }
-}
-int main(void)
-{
-    gotoxy(45,8);
-    printf("*******CALENDAR APPLICATION*******");
-    gotoxy(10,15);
-    printf("Enter any key to Start:");
-    getch();
-    menu();
-    return 0;
-}
+
+
